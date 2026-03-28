@@ -73,6 +73,10 @@ const Templates = () => {
   const [saving, setSaving] = useState<string | null>(null);
 
   const useTemplate = async (template: typeof templates[0]) => {
+    if (!user) {
+      toast.error('Sign in to save templates to your workouts!');
+      return;
+    }
     setSaving(template.name);
     try {
       // Get exercise IDs
@@ -88,7 +92,7 @@ const Templates = () => {
       const { data: workout, error } = await supabase
         .from('workouts')
         .insert({
-          user_id: user!.id,
+          user_id: user.id,
           name: template.name,
           description: template.description,
           workout_type: template.type,
@@ -110,7 +114,7 @@ const Templates = () => {
 
       await supabase.from('workout_exercises').insert(exerciseInserts);
 
-      toast.success(`${template.name} added to your workouts! 🔥`);
+      toast.success(`${template.name} added to your workouts! \u{1F525}`);
       queryClient.invalidateQueries({ queryKey: ['workout-count'] });
     } catch (error: any) {
       toast.error(error.message);
