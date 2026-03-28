@@ -33,12 +33,12 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/builder" element={<ProtectedRoute><Builder /></ProtectedRoute>} />
-            <Route path="/generator" element={<ProtectedRoute><Generator /></ProtectedRoute>} />
-            <Route path="/templates" element={<ProtectedRoute><Templates /></ProtectedRoute>} />
-            <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/builder" element={<Builder />} />
+            <Route path="/generator" element={<Generator />} />
+            <Route path="/templates" element={<Templates />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
