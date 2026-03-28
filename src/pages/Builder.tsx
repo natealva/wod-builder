@@ -59,13 +59,14 @@ const Builder = () => {
 
   const saveMutation = useMutation({
     mutationFn: async () => {
+      if (!user) throw new Error('Sign in to save your workouts!');
       if (!name.trim()) throw new Error('Give your WOD a name!');
       if (exercises.length === 0) throw new Error('Add at least one exercise!');
 
       const { data: workout, error } = await supabase
         .from('workouts')
         .insert({
-          user_id: user!.id,
+          user_id: user.id,
           name,
           description,
           workout_type: workoutType,
@@ -96,7 +97,7 @@ const Builder = () => {
       return workout;
     },
     onSuccess: () => {
-      toast.success('WOD saved! 🔥');
+      toast.success('WOD saved! \u{1F525}');
       queryClient.invalidateQueries({ queryKey: ['workout-count'] });
       setName('');
       setDescription('');
@@ -194,7 +195,7 @@ const Builder = () => {
                   >
                     <div>
                       <span className="text-foreground">{ex.name}</span>
-                      <span className="text-xs text-muted-foreground ml-2">{ex.category} • {ex.muscle_group}</span>
+                      <span className="text-xs text-muted-foreground ml-2">{ex.category} \u{2022} {ex.muscle_group}</span>
                     </div>
                     <Plus className="w-4 h-4 text-primary" />
                   </button>
