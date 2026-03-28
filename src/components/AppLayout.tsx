@@ -14,7 +14,7 @@ const navItems = [
 ];
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
-  const { signOut } = useAuth();
+  const { user, signOut } = useAuth();
   const location = useLocation();
 
   return (
@@ -49,9 +49,17 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
             })}
           </nav>
 
-          <Button variant="ghost" size="sm" onClick={signOut}>
-            <LogOut className="w-4 h-4" />
-          </Button>
+          {user ? (
+            <Button variant="ghost" size="sm" onClick={signOut}>
+              <LogOut className="w-4 h-4" />
+            </Button>
+          ) : (
+            <Link to="/auth">
+              <Button variant="ghost" size="sm">
+                Sign In
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile nav */}
