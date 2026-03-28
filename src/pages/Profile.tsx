@@ -48,7 +48,7 @@ const Profile = () => {
       const { data } = await supabase
         .from('profiles')
         .select('*')
-        .eq('user_id', user!.id)
+        .eq('user_id', user?.id)
         .single();
       return data;
     },
@@ -74,11 +74,11 @@ const Profile = () => {
           equipment,
           goal,
         } as any)
-        .eq('user_id', user!.id);
+        .eq('user_id', user?.id);
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success('Profile saved! 🔥');
+      toast.success('Profile saved! \u{1F525}');
       queryClient.invalidateQueries({ queryKey: ['profile'] });
     },
     onError: (error: Error) => toast.error(error.message),
