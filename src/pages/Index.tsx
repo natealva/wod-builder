@@ -50,7 +50,7 @@ const Index = () => {
           transition={{ delay: 0.7 }}
           className="flex gap-4"
         >
-          <Link to={user ? '/dashboard' : '/auth'}>
+          <Link to={user ? '/dashboard' : '/builder'}>
             <Button size="lg" className="bg-gradient-fire hover:opacity-90 transition-opacity font-display tracking-wider text-lg px-8 h-14 shadow-glow">
               {user ? 'Go to Dashboard' : 'Get Started'}
               <ChevronRight className="w-5 h-5 ml-1" />
