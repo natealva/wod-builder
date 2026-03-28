@@ -12,12 +12,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Save, RotateCcw, Loader2, Pencil, Check } from 'lucide-react';
 
 const focusOptions = [
-  { value: 'surprise', label: 'Surprise Me \u{1F3B2}' },
-  { value: 'upper_body', label: 'Upper Body \u{1F4AA}' },
-  { value: 'lower_body', label: 'Lower Body \u{1F9B5}' },
-  { value: 'full_body', label: 'Full Body \u{1F3CB}\u{FE0F}' },
-  { value: 'core', label: 'Core \u{1F3AF}' },
-  { value: 'cardio', label: 'Cardio \u{2764}\u{FE0F}\u{200D}\u{1F525}' },
+  { value: 'surprise', label: 'Surprise Me' },
+  { value: 'upper_body', label: 'Upper Body' },
+  { value: 'lower_body', label: 'Lower Body' },
+  { value: 'full_body', label: 'Full Body' },
+  { value: 'core', label: 'Core' },
+  { value: 'cardio', label: 'Cardio' },
 ];
 
 const durationOptions = [10, 20, 30, 45, 60];
@@ -74,7 +74,7 @@ const Generator = () => {
     },
     onSuccess: (data) => {
       setGeneratedWod(data);
-      toast.success('WOD generated! \u{1F525}');
+      toast.success('WOD generated!');
     },
     onError: (error: Error) => toast.error(error.message),
   });
@@ -152,7 +152,7 @@ const Generator = () => {
       return workout;
     },
     onSuccess: () => {
-      toast.success('WOD saved to your workouts! \u{1F4BE}');
+      toast.success('WOD saved to your workouts!');
       queryClient.invalidateQueries({ queryKey: ['workout-count'] });
     },
     onError: (error: Error) => toast.error(error.message),
@@ -313,12 +313,12 @@ const Generator = () => {
                     </span>
                     {generatedWod.time_cap_minutes && (
                       <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs">
-                        \u{23F1} {generatedWod.time_cap_minutes} min
+                        {generatedWod.time_cap_minutes} min
                       </span>
                     )}
                     {generatedWod.rounds && (
                       <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs">
-                        \u{1F504} {generatedWod.rounds} rounds
+                        {generatedWod.rounds} rounds
                       </span>
                     )}
                   </div>
@@ -386,7 +386,7 @@ const Generator = () => {
                         )}
                       </div>
                       {ex.weight_suggestion && (
-                        <p className="text-xs text-muted-foreground">\u{1F4A1} {ex.weight_suggestion}</p>
+                        <p className="text-xs text-muted-foreground">{ex.weight_suggestion}</p>
                       )}
                       {ex.notes && (
                         <Input
@@ -402,7 +402,7 @@ const Generator = () => {
                 {/* Coach Notes */}
                 {generatedWod.coach_notes && (
                   <div className="bg-card border border-border rounded-xl p-6 shadow-card">
-                    <h3 className="text-lg font-display text-foreground mb-2">\u{1F3CB}\u{FE0F} Coach Notes</h3>
+                    <h3 className="text-lg font-display text-foreground mb-2">Coach Notes</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{generatedWod.coach_notes}</p>
                   </div>
                 )}
