@@ -52,12 +52,13 @@ const History = () => {
 
   const logMutation = useMutation({
     mutationFn: async () => {
+      if (!user) throw new Error('Sign in to log workouts!');
       const workout = workouts?.find(w => w.id === selectedWorkout);
       const finalName = selectedWorkout ? (workout?.name || 'Unknown') : manualWorkoutName.trim();
       if (!finalName) throw new Error('Enter a workout name or select one');
 
       const { error } = await supabase.from('workout_logs').insert({
-        user_id: user!.id,
+        user_id: user.id,
         workout_id: selectedWorkout || null,
         workout_name: finalName,
         completed_at: new Date(workoutDate).toISOString(),
@@ -69,7 +70,7 @@ const History = () => {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success('Workout logged! 💪');
+      toast.success('Workout logged! \u{1F4AA}');
       queryClient.invalidateQueries({ queryKey: ['workout-logs'] });
       queryClient.invalidateQueries({ queryKey: ['log-count'] });
       queryClient.invalidateQueries({ queryKey: ['recent-logs'] });
